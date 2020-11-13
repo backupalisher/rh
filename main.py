@@ -9,9 +9,10 @@ url_list = ["/js/jssrc/model/dvcinfo/dvccounter/DvcInfo_Counter_ScanCounter.mode
             "/js/jssrc/model/startwlm/Hme_Toner.model.htm"]
 
 if __name__ == '__main__':
-    session = HTMLSession()
+    session = HTMLSession(verify=False)
     with open('model.gz', 'wt') as html_data:
         for url in url_list:
             r = session.get(ip + url)
             r.html.render()
+            html_data.write(f'\r' + ip + url + f'\r')
             html_data.write(r.html.html)
